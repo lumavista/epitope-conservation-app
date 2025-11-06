@@ -2,7 +2,7 @@
 
 This Shiny application provides an alignment-consistent consensus prediction pipeline for conserved Human MHC-I epitopes.
 
-## 📜 Copyright and License
+## Copyright and License
 
 **Copyright © 2025 LumaVista Bio. All rights reserved.**
 
@@ -16,7 +16,7 @@ The data used in this application (specifically the `combined_db.rds` file) is c
 Per the IEDB's terms of use, any use of this tool for research that results in a publication should cite the IEDB's main reference paper. As of late 2024, the primary citation is:
 > Vita R, et al. The Immune Epitope Database (IEDB) in 2024. Nucleic Acids Res. 2024 Jan 5;52(D1):D1263-D1269. (doi: 10.1093/nar/gkad1046)
 
-## 🚀 How to Run (Local Development)
+## How to Run (Local Development)
 
 1.  **Clone this repository:**
     ```bash
