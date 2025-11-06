@@ -42,6 +42,7 @@ server <- function(input, output, session){
     })
     
     message("[Step] Searching local database for published epitopes...")
+    # Note: 'cons_ungap' is passed to the function's 'consensus_ungapped' argument
     pub_df <- tryCatch({
       if(nzchar(uid)) find_published_epitopes_local(cons_ungap, uid) else data.frame()
     }, error = function(e){ message("  Error: ", e$message); data.frame() })
@@ -60,7 +61,12 @@ server <- function(input, output, session){
             df <- query_iedb(peps, a, l)
             if(is_nonempty_df(df)){
               df$Start <- vapply(df$Peptide, function(p){
-                pos <- as.integer(regexpr(p, consensus_ungapped, fixed = TRUE))
+                
+                # --- THIS WAS THE ERROR ---
+                # It should be 'cons_ungap', not 'consensus_ungapped'
+                pos <- as.integer(regexpr(p, cons_ungap, fixed = TRUE))
+                # --- END FIX ---
+                
                 if(!is.na(pos) && pos > 0L) pos else NA_integer_
               }, integer(1))
               df <- df[!is.na(df$Start),]
@@ -146,7 +152,7 @@ server <- function(input, output, session){
     if (is_nonempty_df(pub)) {
       pub$Source <- case_when(
         grepl("tcell", pub$SourceFiles, ignore.case = TRUE) & 
-          grepl("mhc", pub$SourceFiles, ignore.case = TRUE) ~ "MHC / T Cell",
+          grepl("mhc", SourceFiles, ignore.case = TRUE) ~ "MHC / T Cell",
         grepl("mhc", pub$SourceFiles, ignore.case = TRUE) ~ "MHC",
         grepl("tcell", pub$SourceFiles, ignore.case = TRUE) ~ "T Cell",
         TRUE ~ pub$SourceFiles
