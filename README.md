@@ -38,7 +38,7 @@ Per the IEDB's terms of use, any use of this tool for research that results in a
 
 ---
 
-## 🛠️ How to Deploy on a Shiny Server (Linux)
+## How to Deploy on a Shiny Server (Linux)
 
 These instructions are for a typical Linux server (e.g., Ubuntu/Debian).
 
