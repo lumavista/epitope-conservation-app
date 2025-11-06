@@ -1,0 +1,23 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data
+.RData
+
+# RStudio files
+.Rproj.user/
+
+# OAuth token files (e.g., from httr)
+.httr-oauth
+
+# R package build files
+*.Rbuildignore
+*_cache/
+/cache/
+*.Rcheck/
+*tar.gz
+*.zip
+
+# Shiny deployment files
+rsconnect/
