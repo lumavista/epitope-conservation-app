@@ -42,7 +42,6 @@ server <- function(input, output, session){
     })
     
     message("[Step] Searching local database for published epitopes...")
-    # Note: 'cons_ungap' is passed to the function's 'consensus_ungapped' argument
     pub_df <- tryCatch({
       if(nzchar(uid)) find_published_epitopes_local(cons_ungap, uid) else data.frame()
     }, error = function(e){ message("  Error: ", e$message); data.frame() })
@@ -61,12 +60,7 @@ server <- function(input, output, session){
             df <- query_iedb(peps, a, l)
             if(is_nonempty_df(df)){
               df$Start <- vapply(df$Peptide, function(p){
-                
-                # --- THIS WAS THE ERROR ---
-                # It should be 'cons_ungap', not 'consensus_ungapped'
                 pos <- as.integer(regexpr(p, cons_ungap, fixed = TRUE))
-                # --- END FIX ---
-                
                 if(!is.na(pos) && pos > 0L) pos else NA_integer_
               }, integer(1))
               df <- df[!is.na(df$Start),]
@@ -150,13 +144,14 @@ server <- function(input, output, session){
     df_shown <- displayed_data()
     
     if (is_nonempty_df(pub)) {
-      pub$Source <- case_when(
-        grepl("tcell", pub$SourceFiles, ignore.case = TRUE) & 
-          grepl("mhc", SourceFiles, ignore.case = TRUE) ~ "MHC / T Cell",
-        grepl("mhc", pub$SourceFiles, ignore.case = TRUE) ~ "MHC",
-        grepl("tcell", pub$SourceFiles, ignore.case = TRUE) ~ "T Cell",
-        TRUE ~ pub$SourceFiles
-      )
+      pub <- pub %>%
+        mutate(Source = case_when(
+          grepl("tcell", SourceFiles, ignore.case = TRUE) & 
+            grepl("mhc", SourceFiles, ignore.case = TRUE) ~ "MHC / T Cell",
+          grepl("mhc", SourceFiles, ignore.case = TRUE) ~ "MHC",
+          grepl("tcell", SourceFiles, ignore.case = TRUE) ~ "T Cell",
+          TRUE ~ SourceFiles
+        ))
     }
     
     add_aln <- function(df) {
@@ -170,7 +165,7 @@ server <- function(input, output, session){
     predA <- add_aln(pred)
     pubA  <- add_aln(pub)
     
-    plt <- plot_ly()
+    plt <- plot_ly(type = 'scatter', mode = 'markers')
     
     if (is_nonempty_df(predA)) {
       plt <- plt %>% add_trace(
