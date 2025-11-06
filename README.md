@@ -10,6 +10,12 @@ This software is proprietary. Permission is hereby granted, free of charge, to a
 
 This permission **does not** include the right to modify, merge, publish, distribute, sublicense, and/or sell copies of the Software. The Software is provided "as is," without warranty of any kind.
 
+## Data Source and Citation
+
+The data used in this application (specifically the `combined_db.rds` file) is compiled from the **Immune Epitope Database (IEDB)**, a free public resource. All predictions are powered by the IEDB's public API.
+Per the IEDB's terms of use, any use of this tool for research that results in a publication should cite the IEDB's main reference paper. As of late 2024, the primary citation is:
+> Vita R, et al. The Immune Epitope Database (IEDB) in 2024. Nucleic Acids Res. 2024 Jan 5;52(D1):D1263-D1269. (doi: 10.1093/nar/gkad1046)
+
 ## 🚀 How to Run (Local Development)
 
 1.  **Clone this repository:**
