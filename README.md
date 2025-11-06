@@ -29,3 +29,46 @@ This permission **does not** include the right to modify, merge, publish, distri
     ```r
     shiny::runApp()
     ```
+
+---
+
+## 🛠️ How to Deploy on a Shiny Server (Linux)
+
+These instructions are for a typical Linux server (e.g., Ubuntu/Debian).
+
+### 1. Install System Dependencies
+
+You must install R and the system libraries needed by the R packages.
+
+```bash
+# Update package lists
+sudo apt-get update
+
+# Install R and essential build tools
+sudo apt-get install -y r-base r-base-dev build-essential
+
+# Install system libraries required by R packages
+sudo apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev
+```
+
+### 2. Install R Packages
+
+As root (or a user with permission), navigate to the app directory and run the installation script:
+
+```bash
+cd epitope-conservation-app
+sudo Rscript install_packages.R
+```
+
+### 3. Run the App
+
+You can now run the app from the R console:
+
+```r
+shiny::runApp(port = 3838, host = "0.0.0.0")
+```
+
+(Or, if you have Shiny Server installed, copy the app directory to `/srv/shiny-server/`.)
