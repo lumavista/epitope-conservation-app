@@ -1,6 +1,6 @@
 # Conserved Human MHC-I Epitope Predictor
 
-This Shiny application provides an alignment-consistent consensus prediction pipeline for conserved Human MHC-I epitopes.
+This Shiny application provides an alignment-consistent consensus prediction pipeline for conserved human MHC-I epitopes.
 
 ## Copyright and License
 
