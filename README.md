@@ -20,7 +20,7 @@ Per the IEDB's terms of use, any use of this tool for research that results in a
 
 1.  **Clone this repository:**
     ```bash
-    git clone [https://github.com/lumavista/epitope-conservation-app.git](https://github.com/lumavista/epitope-conservation-app.git)
+    git clone https://github.com/lumavista/epitope-conservation-app.git
     cd epitope-conservation-app
     ```
 
